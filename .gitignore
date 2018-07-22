@@ -1,3 +1,4 @@
 tmp/*
 !tmp/.gitkeep
 output.mp4
+vendor

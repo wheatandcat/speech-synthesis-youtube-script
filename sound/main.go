@@ -17,7 +17,7 @@ type Item struct {
 }
 
 func New() *Sound {
-	uuid, _ := uuid.NewV4()
+	uuid := uuid.NewV4()
 
 	s := &Sound{
 		ID: uuid.String(),

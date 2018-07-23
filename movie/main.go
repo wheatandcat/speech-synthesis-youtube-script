@@ -1,6 +1,8 @@
 package movie
 
-import "os/exec"
+import (
+	"os/exec"
+)
 
 type Movie struct {
 	ID string

@@ -57,12 +57,15 @@ func main() {
 		}
 
 		src := "tmp/" + s.ID + "/complex.mp4"
-		dist := "output.mp4"
+		dist := "tmp/" + s.ID + ".mp4"
 
 		cmd := "cp " + src + " " + dist
-		log.Println(cmd)
 
 		if err := exec.Command("sh", "-c", cmd).Run(); err != nil {
+			return err
+		}
+
+		if err := exec.Command("sh", "-c", "rm -rf tmp/"+s.ID).Run(); err != nil {
 			return err
 		}
 

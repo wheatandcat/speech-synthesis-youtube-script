@@ -4,8 +4,6 @@ import (
 	"fmt"
 	"os"
 	"os/exec"
-
-	uuid "github.com/satori/go.uuid"
 )
 
 type Sound struct {
@@ -16,11 +14,9 @@ type Item struct {
 	Body string `json:"body"`
 }
 
-func New() *Sound {
-	uuid := uuid.NewV4()
-
+func New(id string) *Sound {
 	s := &Sound{
-		ID: uuid.String(),
+		ID: id,
 	}
 
 	return s

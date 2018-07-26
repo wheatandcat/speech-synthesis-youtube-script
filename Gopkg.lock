@@ -7,9 +7,15 @@
   revision = "f58768cc1a7a7e77a3bd49e98cdd21419399b6a3"
   version = "v1.2.0"
 
+[[projects]]
+  name = "github.com/urfave/cli"
+  packages = ["."]
+  revision = "cfb38830724cc34fedffe9a2a29fb54fa9169cd1"
+  version = "v1.20.0"
+
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "e34151ee34ca3b36f1e58ff0eedfdeaab932df9d0bad56924b668c296e8e1163"
+  inputs-digest = "985e748eb5c30485381d5b58f6bdb57e0f95c7a7228e4d37c383fdc1438fe524"
   solver-name = "gps-cdcl"
   solver-version = 1

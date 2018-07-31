@@ -32,3 +32,11 @@
 [prune]
   go-tests = true
   unused-packages = true
+
+[[constraint]]
+  name = "github.com/graphql-go/graphql"
+  version = "0.7.5"
+
+[[constraint]]
+  name = "github.com/graphql-go/handler"
+  version = "0.2.1"

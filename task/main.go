@@ -54,7 +54,7 @@ func main() {
 			return err
 		}
 
-		m := movie.New(s.ID)
+		m := movie.New(s.ID, "Title")
 		if err := m.Make(); err != nil {
 			return err
 		}

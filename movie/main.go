@@ -5,18 +5,28 @@ import (
 )
 
 type Movie struct {
-	ID string
+	ID    string
+	Title string
 }
 
-func New(id string) *Movie {
+func New(id string, t string) *Movie {
 	s := &Movie{
-		ID: id,
+		ID:    id,
+		Title: t,
 	}
 
 	return s
 }
 
 func (m *Movie) Make() error {
+	if err := m.titleImage(); err != nil {
+		return err
+	}
+
+	if err := m.imageToMp4(); err != nil {
+		return err
+	}
+
 	if err := m.toMp4(); err != nil {
 		return err
 	}
@@ -28,8 +38,27 @@ func (m *Movie) Make() error {
 	return nil
 }
 
+func (m *Movie) titleImage() error {
+	dist := "tmp/" + m.ID + "/title.jpg"
+	cmd := `docker run -v $(pwd):/image acleancoder/imagemagick-full convert -size 512x288 xc:transparent -font /usr/share/fonts/truetype/liberation/LiberationSansNarrow-Bold.ttf -pointsize 72 -fill white -stroke black -draw "text 50,144 '` + m.Title + `'" image/` + dist
+
+	err := exec.Command("sh", "-c", cmd).Run()
+
+	return err
+}
+
+func (m *Movie) imageToMp4() error {
+	src := " tmp/" + m.ID + "/title.jpg"
+	dist := " tmp/" + m.ID + "/title.mp4"
+	cmd := "docker run -v $(pwd):/tmp/ffmpeg opencoconut/ffmpeg -r 15 -f image2 -i " + src + " -r 15 -an -vcodec libx264 -pix_fmt yuv420p " + dist
+
+	err := exec.Command("sh", "-c", cmd).Run()
+
+	return err
+}
+
 func (m *Movie) toMp4() error {
-	src := " static/movie/input.mp4"
+	src := " tmp/" + m.ID + "/title.mp4"
 	sound := " tmp/" + m.ID + "/join.m4a"
 	dist := " tmp/" + m.ID + "/join.mp4"
 
